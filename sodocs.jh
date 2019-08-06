@@ -1,0 +1,27 @@
+entity DocsType {
+name String
+}
+
+entity SoDocs {
+fileName String,
+uploadFile Blob,
+uploadFileContentType String,
+privateMode Boolean,
+}
+
+entity ShippingOrder {
+}
+
+
+relationship ManyToOne {
+SoDocs to ShippingOrder
+SoDocs to DocsType
+}
+	
+	
+// Set pagination options
+//paginate JobHistory, Employee with infinite-scroll
+//paginate Job with pagination
+dto * with mapstruct
+// Set service options to all except few
+service all with serviceImpl

@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <span>So Docs</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-so-docs" [routerLink]="['/so-docs/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new So Docs
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="soDocs?.length === 0">
+        <span>No soDocs found</span>
+    </div>
+    <div class="table-responsive" *ngIf="soDocs?.length > 0">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>File Name</span></th>
+            <th><span>Upload File</span></th>
+            <th><span>Upload File Content Type</span></th>
+            <th><span>Private Mode</span></th>
+            <th><span>Shipping Order</span></th>
+            <th><span>Docs Type</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let soDocs of soDocs ;trackBy: trackId">
+                <td><a [routerLink]="['/so-docs', soDocs.id, 'view' ]">{{soDocs.id}}</a></td>
+                <td>{{soDocs.fileName}}</td>
+                <td>
+                    <a *ngIf="soDocs.uploadFile" (click)="openFile(soDocs.uploadFileContentType, soDocs.uploadFile)">open</a>
+                    <span *ngIf="soDocs.uploadFile">{{soDocs.uploadFileContentType}}, {{byteSize(soDocs.uploadFile)}}</span>
+                </td>
+                <td>{{soDocs.uploadFileContentType}}</td>
+                <td>{{soDocs.privateMode}}</td>
+                <td>
+                    <div *ngIf="soDocs.shippingOrderId">
+                        <a [routerLink]="['/shipping-order', soDocs.shippingOrderId , 'view' ]" >{{soDocs.shippingOrderId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="soDocs.docsTypeId">
+                        <a [routerLink]="['/docs-type', soDocs.docsTypeId , 'view' ]" >{{soDocs.docsTypeId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/so-docs', soDocs.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/so-docs', soDocs.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/so-docs', { outlets: { popup: soDocs.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

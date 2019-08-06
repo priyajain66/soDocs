@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-so-docs-heading">Create or edit a So Docs</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fileName">File Name</label>
+                    <input type="text" class="form-control" name="fileName" id="field_fileName"
+                           formControlName="fileName"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_uploadFile">Upload File</label>
+                    <div>
+                        <div *ngIf="editForm.get('uploadFile').value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('uploadFileContentType').value, editForm.get('uploadFile').value)">open</a><br>
+                            <span class="pull-left">{{editForm.get('uploadFileContentType').value}}, {{byteSize(editForm.get('uploadFile').value)}}</span>
+                            <button type="button" (click)="editForm.patchValue({uploadFile: null});editForm.patchValue({uploadFileContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_uploadFile" (change)="setFileData($event, 'uploadFile', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="uploadFile" id="field_uploadFile"
+                           formControlName="uploadFile"/>
+                    <input type="hidden" class="form-control" name="uploadFileContentType" id="field_uploadFileContentType"
+                           formControlName="uploadFileContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_uploadFileContentType">Upload File Content Type</label>
+                    <input type="text" class="form-control" name="uploadFileContentType" id="field_uploadFileContentType"
+                           formControlName="uploadFileContentType"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_privateMode">Private Mode</label>
+                    <input type="checkbox" class="form-control" name="privateMode" id="field_privateMode"
+                           formControlName="privateMode"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_shippingOrder">Shipping Order</label>
+                    <select class="form-control" id="field_shippingOrder" name="shippingOrder" formControlName="shippingOrderId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="shippingOrderOption.id" *ngFor="let shippingOrderOption of shippingorders; trackBy: trackShippingOrderById">{{shippingOrderOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_docsType">Docs Type</label>
+                    <select class="form-control" id="field_docsType" name="docsType" formControlName="docsTypeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="docsTypeOption.id" *ngFor="let docsTypeOption of docstypes; trackBy: trackDocsTypeById">{{docsTypeOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

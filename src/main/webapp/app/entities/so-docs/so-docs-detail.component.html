@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="soDocs">
+            <h2><span>So Docs</span> {{soDocs.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>File Name</span></dt>
+                <dd>
+                    <span>{{soDocs.fileName}}</span>
+                </dd>
+                <dt><span>Upload File</span></dt>
+                <dd>
+                    <div *ngIf="soDocs.uploadFile">
+                        <a (click)="openFile(soDocs.uploadFileContentType, soDocs.uploadFile)">open</a>
+                        {{soDocs.uploadFileContentType}}, {{byteSize(soDocs.uploadFile)}}
+                    </div>
+                </dd>
+                <dt><span>Upload File Content Type</span></dt>
+                <dd>
+                    <span>{{soDocs.uploadFileContentType}}</span>
+                </dd>
+                <dt><span>Private Mode</span></dt>
+                <dd>
+                    <span>{{soDocs.privateMode}}</span>
+                </dd>
+                <dt><span>Shipping Order</span></dt>
+                <dd>
+                    <div *ngIf="soDocs.shippingOrderId">
+                        <a [routerLink]="['/shipping-order', soDocs.shippingOrderId, 'view']">{{soDocs.shippingOrderId}}</a>
+                    </div>
+                </dd>
+                <dt><span>Docs Type</span></dt>
+                <dd>
+                    <div *ngIf="soDocs.docsTypeId">
+                        <a [routerLink]="['/docs-type', soDocs.docsTypeId, 'view']">{{soDocs.docsTypeId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/so-docs', soDocs.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
