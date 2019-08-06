@@ -1,0 +1,21 @@
+{
+    "name": "ShippingOrder",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "soDocs",
+            "otherEntityRelationshipName": "shippingOrder",
+            "relationshipName": "soDocs"
+        }
+    ],
+    "changelogDate": "20190806102832",
+    "entityTableName": "shipping_order",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

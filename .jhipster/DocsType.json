@@ -1,0 +1,26 @@
+{
+    "name": "DocsType",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "soDocs",
+            "otherEntityRelationshipName": "docsType",
+            "relationshipName": "soDocs"
+        }
+    ],
+    "changelogDate": "20190806102830",
+    "entityTableName": "docs_type",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

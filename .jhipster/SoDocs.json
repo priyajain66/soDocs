@@ -1,0 +1,47 @@
+{
+    "name": "SoDocs",
+    "fields": [
+        {
+            "fieldName": "fileName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "uploadFile",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "uploadFileContentType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "privateMode",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "shippingOrder",
+            "otherEntityRelationshipName": "soDocs",
+            "relationshipName": "shippingOrder",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "docsType",
+            "otherEntityRelationshipName": "soDocs",
+            "relationshipName": "docsType",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190806102831",
+    "entityTableName": "so_docs",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
